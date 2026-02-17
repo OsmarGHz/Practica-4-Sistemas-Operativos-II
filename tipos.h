@@ -28,6 +28,13 @@ struct Traduccion {
     int direccionFisica;
     bool valida; //Aqui nos preguntamos, fue valida la traduccion?
     string mensajeError; //Contenido del mensaje de error en caso de no ser valida
+
+    // Bits de control
+    bool bitCache;
+    bool bitReferida;
+    bool bitModificada;
+    bool bitProteccion;
+    bool bitPresente;
 };
 
 #endif
