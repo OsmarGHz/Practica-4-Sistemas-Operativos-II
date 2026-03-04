@@ -41,18 +41,18 @@ Traduccion traducirDireccion(const ConfiguracionMemoria & config,
     // Extraemos los bits de control (los siguientes 5 bits)
     int bitsControl = entrada >> config.bitsMarco;
 
-    // Orden: C R M P V
-    t.bitCache     = (bitsControl >> 4) & 1;
-    t.bitReferida  = (bitsControl >> 3) & 1;
-    t.bitModificada= (bitsControl >> 2) & 1;
-    t.bitProteccion= (bitsControl >> 1) & 1;
-    t.bitPresente  =  bitsControl        & 1;
+    t.bitPresente  =  bitsControl        & 1; //Presente ausente
 
     if (!t.bitPresente) {
         t.valida = false;
         t.mensajeError = "PAGE FAULT: la pagina no esta presente en memoria";
         return t;
     }
+
+    t.bitCache     = (bitsControl >> 4) & 1;
+    t.bitReferida  = (bitsControl >> 3) & 1;
+    t.bitModificada= (bitsControl >> 2) & 1;
+    t.bitProteccion= (bitsControl >> 1) & 1;
 
     // Construimos direccion fisica
     t.direccionFisica = (t.numMarco << config.bitsOffset) | t.offset;
