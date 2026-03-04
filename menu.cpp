@@ -17,6 +17,21 @@ void mostrarConfiguracion(const ConfiguracionMemoria & config) {
     cout << "Bits de offset: " << config.bitsOffset << "\n";
 }
 
+void mostrarExtra(const ConfiguracionMemoria & config){
+    for (int i = 0; i < config.numeroDePaginas; i++) {
+        int entrada = config.tablaPaginas[i];
+        Traduccion t = desempaquetarEntrada(config, i);
+        cout << setw(10) << i << " | " << setw(7) << entrada << " | ";
+        if (t.bitPresente) {
+            int bitsControl = entrada >> config.bitsMarco;
+            cout << setw(20) << aBinario(bitsControl, 5) << "  | " << setw(10) << t.numMarco << "\n";
+        } else {
+            cout << setw(20) << " " << "  | " << "\n";
+        }
+    }
+
+}
+
 void mostrarTraduccion(const Traduccion & trad) {
     cout << "\n=== Resultado de la Traduccion ===\n";
     cout << "Direccion virtual (hex): " << trad.direccionVirtualHexadecimal << "\n";
@@ -30,7 +45,7 @@ void mostrarTraduccion(const Traduccion & trad) {
     cout << "Offset: " << trad.offset << "\n";
 
     cout << "\nBits de control:\n";
-    cout << "Cache (C): " << trad.bitCache << "\n";
+    cout << "Cache inhabilitada (C): " << trad.bitCache << "\n";
     cout << "Referida (R): " << trad.bitReferida << "\n";
     cout << "Modificada (M): " << trad.bitModificada << "\n";
     cout << "Proteccion (P): " << trad.bitProteccion << "\n";

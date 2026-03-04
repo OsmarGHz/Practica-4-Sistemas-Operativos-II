@@ -22,4 +22,6 @@ Convierte un entero a su representación en hexadecimal como string
 */
 string aHexadecimal(int numero);
 
+Traduccion desempaquetarEntrada(const ConfiguracionMemoria & config, int numPagina);
+
 #endif

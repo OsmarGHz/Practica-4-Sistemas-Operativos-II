@@ -81,3 +81,18 @@ string aHexadecimal(int numero) {
     ss << uppercase << hex << numero;
     return ss.str();
 }
+
+Traduccion desempaquetarEntrada(const ConfiguracionMemoria & config, int numPagina) {
+    Traduccion t;
+    t.numPagina = numPagina;
+    int entrada = config.tablaPaginas[numPagina];
+    t.numMarco = entrada & ((1 << config.bitsMarco) - 1);
+    int bitsControl = entrada >> config.bitsMarco;
+    t.bitCache      = (bitsControl >> 4) & 1;
+    t.bitReferida   = (bitsControl >> 3) & 1;
+    t.bitModificada = (bitsControl >> 2) & 1;
+    t.bitProteccion = (bitsControl >> 1) & 1;
+    t.bitPresente   =  bitsControl       & 1;
+    t.valida = t.bitPresente;
+    return t;
+}

@@ -20,6 +20,7 @@ int main(){
     }
 
     mostrarConfiguracion(config);
+    mostrarExtra(config);
     ejecutarMenu(config);
 
     return 0;

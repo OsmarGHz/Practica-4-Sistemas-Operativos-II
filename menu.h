@@ -11,4 +11,6 @@ void mostrarTraduccion(const Traduccion & trad);
 
 void ejecutarMenu(ConfiguracionMemoria & config);
 
+void mostrarExtra(const ConfiguracionMemoria & config);
+
 #endif
